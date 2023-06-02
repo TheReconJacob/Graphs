@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Graph.h"
 #include "Location.h"
+#include "BFS.h"
 
 int main()
 {
@@ -40,7 +41,8 @@ int main()
     graph.AddEdge(b->key, f->key, 1);
     graph.AddEdge(f->key, h->key, 1);
 
-    graph.Display();
+    BFS bfs(&graph);
+    bfs.Traverse(a);
 
     return 0;
 }
