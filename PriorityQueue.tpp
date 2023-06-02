@@ -1,31 +1,51 @@
 template <typename T>
-PriorityQueue<T>::PriorityQueue(int size)
+PriorityQueue<T>::PriorityQueue(int size) : size(size)
 {
-    data = new T[size];
+    data = new T*[size];
     count = 0;
 }
 
 template <typename T>
-void PriorityQueue<T>::Insert(T item)
+PriorityQueue<T>::~PriorityQueue()
 {
-    if (IsEmpty())
+}
+
+template <typename T>
+void PriorityQueue<T>::Insert(T* item)
+{
+    if (count == 0)
     {
-        data[0] = item;
-        count++;
+        data[count++] = item;
     }
     else
     {
-        int i;
-        for (i = count - 1; i >= 0; i--)
+        int j;
+        for (j = (count - 1); j >= 0; j--)
         {
-            if (item > data[i])
-                data[i + 1] = data[i];
+            if (*item > *data[j])
+            {
+                data[j + 1] = data[j];
+            }
             else
+            {
                 break;
+            }
         }
-        data[i + 1] = item;
+        data[j + 1] = item;
         count++;
     }
+}
+
+template <typename T>
+T* PriorityQueue<T>::Remove()
+{
+    return data[--count];
+}
+
+template <typename T>
+T* PriorityQueue<T>::PeakMin()
+{
+    return data[count - 1];
 }
 
 template <typename T>
@@ -41,20 +61,7 @@ bool PriorityQueue<T>::IsFull()
 }
 
 template <typename T>
-T PriorityQueue<T>::PeakMin()
-{
-    return data[count - 1];
-}
-
-template <typename T>
-T PriorityQueue<T>::Remove()
-{
-    count--;
-    return data[count];
-}
-
-template <typename T>
 int PriorityQueue<T>::Size()
 {
-    return count;
+    return size;
 }

@@ -1,19 +1,20 @@
 #pragma once
+
 template <typename T>
 class PriorityQueue
 {
-private:
-    int count;
-    T* data;
     int size;
+    T** data;
+    int count;
 
 public:
     PriorityQueue(int size);
-    void Insert(T item);
+    ~PriorityQueue();
+    void Insert(T* item);
+    T* Remove();
+    T* PeakMin();
     bool IsEmpty();
     bool IsFull();
-    T PeakMin();
-    T Remove();
     int Size();
 };
 

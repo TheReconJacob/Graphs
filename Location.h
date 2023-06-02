@@ -9,7 +9,6 @@ public:
 	float x;
 	float y;
 
-private:
 	void Display();
 	Location(int key, char name);
 	Location(int key, char name, float x, float y);
